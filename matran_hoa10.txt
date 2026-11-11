@@ -1,0 +1,22 @@
+Câu 1: Đối tượng nghiên cứu của hóa học, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 2: Vai trò của hóa học đối với đời sống, sản xuất và phát triển kinh tế, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 3: Phương pháp học tập và nghiên cứu hóa học hiệu quả, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - thông hiểu
+Câu 4: Thành phần cấu tạo của nguyên tử (hạt nhân và lớp vỏ nguyên tử), loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 5: Điện tích và khối lượng của các hạt cơ bản trong nguyên tử (proton, neutron, electron), loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 6: Khái niệm nguyên tố hóa học, số hiệu nguyên tử và kí hiệu nguyên tử, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 7: Khái niệm đồng vị và nguyên tử khối, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 8: Khái niệm, hình dạng orbital nguyên tử (AO s, p) và số lượng electron trong một AO, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 9: Khái niệm và đặc điểm của lớp electron, phân lớp electron, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 10: Lịch sử phát minh và cấu tạo bảng tuần hoàn các nguyên tố hóa học (ô nguyên tố, chu kì, nhóm), loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 11: Xu hướng biến đổi thành phần và tính chất acid/base của oxide, hydroxide theo chu kì, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 12: Nhận biết công thức oxide cao nhất của nguyên tố nhóm A theo chu kì, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 13: Nhận biết công thức hydroxide tương ứng của nguyên tố nhóm A theo chu kì, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 14: Phát biểu định luật tuần hoàn các nguyên tố hóa học, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 15: Sự biến đổi tuần hoàn tính chất của các nguyên tố theo định luật tuần hoàn, loại câu hỏi - trắc nghiệm 4 phương án, mức độ - nhận biết
+Câu 16: Ý nghĩa của bảng tuần hoàn các nguyên tố hóa học (mối liên hệ giữa vị trí và tính chất), loại câu hỏi - trắc nghiệm 4 phương án, mức độ - thông hiểu
+Câu 17: Cấu trúc lớp vỏ electron nguyên tử (khái niệm AO, lớp/phân lớp electron, viết cấu hình electron với Z <= 20 và dự đoán tính chất kim loại/phi kim), loại câu hỏi - trắc nghiệm đúng-sai gồm 4 ý, mức độ - nhận biết (ý a), thông hiểu (ý b, c), vận dụng (ý d)
+Câu 18: Cấu tạo bảng tuần hoàn và xu hướng biến đổi tính chất nguyên tử (ô, chu kì, nhóm, phân loại nguyên tố, giải thích và sắp xếp bán kính nguyên tử, độ âm điện, tính kim loại/phi kim), loại câu hỏi - trắc nghiệm đúng-sai gồm 4 ý, mức độ - nhận biết (ý a), thông hiểu (ý b, c), vận dụng (ý d)
+Câu 19: Dự đoán tính chất hóa học cơ bản (kim loại hay phi kim) dựa vào đặc điểm cấu hình electron lớp ngoài cùng, loại câu hỏi - trả lời ngắn, mức độ - vận dụng
+Câu 20: Xác định vị trí nguyên tố (ô, chu kì, nhóm) trong bảng tuần hoàn dựa vào cấu hình electron hoặc số hiệu nguyên tử Z, loại câu hỏi - trả lời ngắn, mức độ - vận dụng
+Câu 21: Nhận xét và giải thích xu hướng biến đổi bán kính nguyên tử, độ âm điện, tính kim loại và phi kim trong một chu kì hoặc nhóm A, loại câu hỏi - trả lời ngắn, mức độ - thông hiểu
+Câu 22: Suy luận tính chất hóa học của nguyên tố, hợp chất dựa vào vị trí trong bảng tuần hoàn và xác định nguyên tố thuộc nhóm A, loại câu hỏi - trả lời ngắn, mức độ - thông hiểu

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduKit 2025 - Trợ Lý Giáo Viên THPT</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- MathJax for Chemistry & Math formulas -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #f8fafc;
+        }
+        .active-tab {
+            border-bottom: 3px solid #059669;
+            color: #059669;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="min-h-screen text-slate-800 flex flex-col">
+
+    <!-- Header Navigation -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo & Brand -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-tr from-emerald-600 to-teal-600 rounded-xl flex items-center justify-center text-white shadow-md shadow-emerald-500/20">
+                        <i data-lucide="book-open" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-emerald-700 to-teal-600 bg-clip-text text-transparent">EduKit 2025</span>
+                        <span class="text-xs ml-2 px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-medium">Trợ Lý Giáo Viên</span>
+                    </div>
+                </div>
+
+                <!-- Navigation Tabs (Ưu tiên KHBD làm Tab chính) -->
+                <div class="flex space-x-1 sm:space-x-4">
+                    <button onclick="switchTab('khbd-tab')" id="nav-khbd" class="px-4 py-5 text-sm active-tab flex items-center gap-2 transition-all">
+                        <i data-lucide="file-text" class="w-4 h-4"></i>
+                        <span>Soạn KHBD (CV 5512)</span>
+                    </button>
+                    <button onclick="switchTab('shuffle-tab')" id="nav-shuffle" class="px-4 py-5 text-sm text-slate-600 hover:text-emerald-600 flex items-center gap-2 transition-all">
+                        <i data-lucide="shuffle" class="w-4 h-4"></i>
+                        <span>Trộn Đề Thi 2025</span>
+                    </button>
+                    <button onclick="switchTab('guide-tab')" id="nav-guide" class="px-4 py-5 text-sm text-slate-600 hover:text-emerald-600 flex items-center gap-2 transition-all">
+                        <i data-lucide="help-circle" class="w-4 h-4"></i>
+                        <span>Hướng Dẫn</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+
+        <!-- ========================================== -->
+        <!-- TAB 1 (ƯU TIÊN): SOẠN KẾ HOẠCH BÀI DẠY (CV 5512) -->
+        <!-- ========================================== -->
+        <div id="khbd-tab" class="space-y-6">
+            
+            <!-- Banner KHBD -->
+            <div class="bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 rounded-2xl p-6 text-white shadow-lg shadow-teal-700/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="px-2.5 py-0.5 bg-white/20 text-white text-xs rounded-full font-semibold">Công văn 5512/BGDĐT-GDTrH</span>
+                        <span class="text-emerald-200 text-xs">Môn Hóa học THPT (Lớp 10, 11, 12)</span>
+                    </div>
+                    <h1 class="text-2xl font-bold mb-1">Trợ Lý Soạn Kế Hoạch Bài Dạy Chuẩn 5512</h1>
+                    <p class="text-teal-100 text-xs sm:text-sm max-w-2xl">Hỗ trợ đầy đủ Mục tiêu 3 thành phần, Thiết bị học liệu và 4 Hoạt động học (Khởi động, Hình thành kiến thức, Luyện tập, Vận dụng) với bảng 2 cột chuẩn thể thức in ấn.</p>
+                </div>
+                <div class="flex flex-wrap gap-2 shrink-0">
+                    <button onclick="exportKHBDWord()" class="px-5 py-2.5 bg-white text-emerald-800 hover:bg-emerald-50 rounded-xl text-sm font-bold shadow-md flex items-center gap-2 transition">
+                        <i data-lucide="file-down" class="w-4 h-4 text-emerald-700"></i>
+                        <span>Xuất File Word (.docx)</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Thanh chọn nhanh bài học & Tạo khung tự động -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-4 items-end">
+                <div class="lg:col-span-5">
+                    <label class="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1.5">
+                        <i data-lucide="library" class="w-4 h-4 text-emerald-600"></i>
+                        Chọn bài học mẫu có sẵn trong thư viện:
+                    </label>
+                    <select id="select-lesson-library" class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm font-medium text-slate-800 focus:ring-2 focus:ring-emerald-500 bg-slate-50" onchange="onSelectLibraryLesson(this.value)">
+                        <!-- Populated by JS -->
+                    </select>
+                </div>
+
+                <div class="lg:col-span-5">
+                    <label class="block text-xs font-bold text-slate-700 mb-1 flex items-center gap-1.5">
+                        <i data-lucide="wand-2" class="w-4 h-4 text-teal-600"></i>
+                        Hoặc nhập tên bài mới bất kì để tự động tạo khung:
+                    </label>
+                    <input type="text" id="input-custom-lesson" placeholder="Ví dụ: Bài 9: Liên kết ion..." class="w-full px-3 py-2 border border-slate-300 rounded-xl text-sm focus:ring-2 focus:ring-emerald-500">
+                </div>
+
+                <div class="lg:col-span-2">
+                    <button onclick="generateCustomKHBD()" class="w-full py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold flex items-center justify-center gap-1.5 transition shadow-sm">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>Tạo Khung</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Form Soạn KHBD Chi Tiết -->
+            <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                
+                <!-- 1. Thông tin chung -->
+                <div>
+                    <h3 class="text-base font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">1</span>
+                        Thông Tin Chung Về Bài Dạy
+                    </h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-sm">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tên trường:</label>
+                            <input type="text" id="khbd-school" value="TRƯỜNG THPT NGUYỄN HUỆ" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tổ chuyên môn:</label>
+                            <input type="text" id="khbd-dept" value="TỔ HÓA HỌC" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Giáo viên soạn:</label>
+                            <input type="text" id="khbd-teacher" value="NGUYỄN VĂN BẢO" class="w-full px-3 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div class="sm:col-span-2">
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tên bài học:</label>
+                            <input type="text" id="khbd-lesson" class="w-full px-3 py-2 border border-slate-300 rounded-lg font-bold text-emerald-900 focus:ring-2 focus:ring-emerald-500">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Môn học & Khối lớp:</label>
+                            <div class="flex gap-2">
+                                <input type="text" id="khbd-subject" value="HÓA HỌC" placeholder="Môn học" class="w-2/3 px-3 py-2 border border-slate-300 rounded-lg">
+                                <input type="text" id="khbd-grade" value="10" placeholder="Lớp" class="w-1/3 px-3 py-2 border border-slate-300 rounded-lg text-center font-bold">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Mục tiêu (I) -->
+                <div>
+                    <h3 class="text-base font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">2</span>
+                        I. Mục Tiêu Dạy Học (Kiến thức, Năng lực, Phẩm chất)
+                    </h3>
+                    <div class="space-y-4 text-sm">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">1. Về kiến thức (Học sinh nêu, trình bày, giải thích, viết được những gì):</label>
+                            <textarea id="khbd-knowledge" rows="3" class="w-full p-3 border border-slate-300 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-emerald-500"></textarea>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">2a. Năng lực chung (Tự chủ, giao tiếp - hợp tác, giải quyết vấn đề):</label>
+                                <textarea id="khbd-comp-gen" rows="3" class="w-full p-3 border border-slate-300 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-emerald-500"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">2b. Năng lực đặc thù Hóa học (Nhận thức hóa học, tìm hiểu tự nhiên, vận dụng):</label>
+                                <textarea id="khbd-comp-sub" rows="3" class="w-full p-3 border border-slate-300 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-emerald-500"></textarea>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">3. Về phẩm chất (Yêu nước, nhân ái, chăm chỉ, trung thực, trách nhiệm):</label>
+                            <textarea id="khbd-qualities" rows="2" class="w-full p-3 border border-slate-300 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-emerald-500"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Thiết bị và học liệu (II) -->
+                <div>
+                    <h3 class="text-base font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">3</span>
+                        II. Thiết Bị Dạy Học & Học Liệu
+                    </h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">1. Đối với giáo viên (Thiết bị, máy chiếu, tranh ảnh, phiếu học tập):</label>
+                            <textarea id="khbd-eq-teacher" rows="2" class="w-full p-3 border border-slate-300 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-emerald-500"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-700 mb-1">2. Đối với học sinh (SGK, vở ghi, đồ dùng học tập):</label>
+                            <textarea id="khbd-eq-student" rows="2" class="w-full p-3 border border-slate-300 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-emerald-500"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Tiến trình dạy học (III) -->
+                <div>
+                    <h3 class="text-base font-bold text-slate-800 mb-4 pb-2 border-b border-slate-100 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">4</span>
+                            <span>III. Tiến Trình Dạy Học (4 Hoạt Động Chuẩn 5512)</span>
+                        </div>
+                        <span class="text-xs text-slate-400 font-normal">Gồm 4 bước: Chuyển giao - Thực hiện - Báo cáo - Kết luận</span>
+                    </h3>
+                    <div id="khbd-activities-container" class="space-y-4">
+                        <!-- 4 activities filled by JS -->
+                    </div>
+                </div>
+
+                <!-- 5. Phụ lục -->
+                <div>
+                    <h3 class="text-base font-bold text-slate-800 mb-3 flex items-center gap-2">
+                        <span class="w-6 h-6 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-bold">5</span>
+                        IV. Phụ Lục / Hồ Sơ Dạy Học (Phiếu học tập, bài tập giao về nhà)
+                    </h3>
+                    <textarea id="khbd-appendix" rows="3" class="w-full p-3 border border-slate-300 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-emerald-500" placeholder="Nội dung các phiếu học tập số 1, số 2..."></textarea>
+                </div>
+
+                <!-- Nút xuất Word to rõ -->
+                <div class="pt-4 flex justify-end">
+                    <button onclick="exportKHBDWord()" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-base shadow-lg shadow-emerald-600/20 flex items-center gap-2 transition">
+                        <i data-lucide="file-down" class="w-6 h-6"></i>
+                        <span>XUẤT KẾ HOẠCH BÀI DẠY RA FILE WORD (.DOCX)</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 2: TRỘN ĐỀ THI (XÁO ĐỀ 2025) -->
+        <!-- ========================================== -->
+        <div id="shuffle-tab" class="hidden space-y-6">
+            
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl p-6 text-white shadow-lg shadow-blue-700/10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <div>
+                    <h1 class="text-2xl font-bold mb-1">Trộn Đề Thi Định Dạng Mới (Bộ GD&ĐT 2025)</h1>
+                    <p class="text-blue-100 text-sm">Hỗ trợ đầy đủ 3 phần: Trắc nghiệm 4 lựa chọn, Trắc nghiệm Đúng/Sai, và Trắc nghiệm Trả lời ngắn. Tự động sinh mã đề, bảng ma trận đáp án và xuất file Word in ấn chuẩn.</p>
+                </div>
+                <div class="flex gap-2">
+                    <button onclick="loadLocalFilesList()" class="px-4 py-2 bg-white/20 hover:bg-white/30 rounded-xl text-sm font-semibold backdrop-blur-md flex items-center gap-1.5 transition">
+                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                        <span>Quét file trong máy</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- BƯỚC 1: CHỌN NGUỒN ĐỀ -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Cột trái: Nạp file có sẵn hoặc tải file mới -->
+                <div class="lg:col-span-1 space-y-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                                <i data-lucide="folder" class="w-5 h-5 text-amber-500"></i>
+                                File có sẵn trong máy
+                            </h3>
+                            <span class="text-xs text-slate-400">e:\lam de</span>
+                        </div>
+                        <div id="local-files-list" class="space-y-2 max-h-56 overflow-y-auto pr-1">
+                            <div class="text-xs text-slate-500 text-center py-4">Đang tải danh sách file...</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <h3 class="font-bold text-slate-800 text-base mb-3 flex items-center gap-2">
+                            <i data-lucide="upload-cloud" class="w-5 h-5 text-blue-600"></i>
+                            Tải file khác lên
+                        </h3>
+                        <div class="border-2 border-dashed border-slate-300 hover:border-blue-500 rounded-xl p-4 text-center cursor-pointer transition bg-slate-50/50" onclick="document.getElementById('file-input').click()">
+                            <i data-lucide="file-up" class="w-8 h-8 text-slate-400 mx-auto mb-2"></i>
+                            <p class="text-xs font-semibold text-slate-700">Chọn file Word (.docx) hoặc LaTeX (.tex)</p>
+                            <p class="text-[11px] text-slate-400 mt-1">Kéo thả hoặc nhấp để tải file</p>
+                            <input type="file" id="file-input" class="hidden" accept=".docx,.tex,.txt" onchange="handleFileUpload(event)">
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+                        <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                            <i data-lucide="sliders" class="w-5 h-5 text-indigo-600"></i>
+                            Cấu hình trộn đề
+                        </h3>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Mã đề thi cần tạo (cách nhau dấu phẩy):</label>
+                            <input type="text" id="cfg-codes" value="101, 102, 103, 104" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm font-semibold text-indigo-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-600 mb-1">Tên trường / Đơn vị:</label>
+                            <input type="text" id="cfg-school" value="TRƯỜNG THPT NGUYỄN HUỆ" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-100 space-y-2 text-xs">
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" id="cfg-shuffle-opts" checked class="w-4 h-4 text-blue-600 rounded">
+                                <span class="font-medium text-slate-700">Xáo phương án A, B, C, D (Phần I)</span>
+                            </label>
+                            <label class="flex items-center gap-2 cursor-pointer">
+                                <input type="checkbox" id="cfg-shuffle-tf" checked class="w-4 h-4 text-blue-600 rounded">
+                                <span class="font-medium text-slate-700">Xáo các ý a, b, c, d (Phần II)</span>
+                            </label>
+                        </div>
+
+                        <button onclick="startShuffle()" id="btn-shuffle" class="w-full mt-3 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white rounded-xl font-bold shadow-md shadow-blue-600/20 flex items-center justify-center gap-2 transition">
+                            <i data-lucide="zap" class="w-5 h-5"></i>
+                            <span>TIẾN HÀNH TRỘN ĐỀ</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cột phải: Xem trước cấu trúc đề & Kết quả xáo -->
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-slate-100 pb-3 mb-3">
+                            <div>
+                                <span class="text-xs font-bold text-blue-600 uppercase tracking-wider">Đề thi đang nạp:</span>
+                                <h2 id="current-file-name" class="text-lg font-bold text-slate-800">Chưa chọn đề thi</h2>
+                            </div>
+                            <div id="stat-badges" class="flex gap-2">
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 text-xs rounded-lg font-semibold">Phần I: 0</span>
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 text-xs rounded-lg font-semibold">Phần II: 0</span>
+                                <span class="px-2.5 py-1 bg-slate-100 text-slate-600 text-xs rounded-lg font-semibold">Phần III: 0</span>
+                            </div>
+                        </div>
+
+                        <div id="exam-preview-container" class="max-h-96 overflow-y-auto space-y-4 text-sm pr-2">
+                            <div class="text-center py-12 text-slate-400">
+                                <i data-lucide="file-search" class="w-12 h-12 mx-auto mb-2 opacity-50"></i>
+                                <p>Hãy chọn một file từ danh sách bên trái hoặc tải file lên để xem trước cấu trúc đề thi.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="shuffle-result-box" class="hidden bg-white p-6 rounded-2xl border-2 border-emerald-500 shadow-lg shadow-emerald-500/5 space-y-4">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                                    <i data-lucide="check" class="w-5 h-5 font-bold"></i>
+                                </div>
+                                <h3 class="font-bold text-lg text-slate-800">Đã trộn đề thi thành công!</h3>
+                            </div>
+                            <a id="btn-download-zip" href="#" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-bold flex items-center gap-2 shadow-sm transition">
+                                <i data-lucide="download" class="w-4 h-4"></i>
+                                <span>Tải toàn bộ (.ZIP)</span>
+                            </a>
+                        </div>
+
+                        <p class="text-xs text-slate-500">Các file Word đã được tạo chuẩn mẫu in ấn của Bộ GD&ĐT. Bạn có thể tải trọn bộ hoặc tải từng mã đề bên dưới:</p>
+
+                        <div id="download-buttons-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2"></div>
+
+                        <div class="pt-4 border-t border-slate-100">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-bold text-slate-500 uppercase">Xem trước mã đề:</span>
+                                <div id="preview-code-tabs" class="flex gap-1"></div>
+                            </div>
+                            <div id="shuffled-code-preview" class="p-4 bg-slate-50 rounded-xl max-h-72 overflow-y-auto text-xs space-y-2 border border-slate-200"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================== -->
+        <!-- TAB 3: HƯỚNG DẪN -->
+        <!-- ========================================== -->
+        <div id="guide-tab" class="hidden space-y-6">
+            <div class="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">Hướng Dẫn Nhanh</h2>
+                    <p class="text-slate-600 text-sm">Bộ công cụ trợ lý cá nhân dành riêng cho thầy Bảo.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+                    <div class="p-5 bg-emerald-50/50 rounded-2xl border border-emerald-100 space-y-3">
+                        <div class="flex items-center gap-2 font-bold text-emerald-900 text-base">
+                            <i data-lucide="file-text" class="w-5 h-5 text-emerald-600"></i>
+                            Quy trình soạn KHBD (CV 5512)
+                        </div>
+                        <ul class="list-disc list-inside space-y-2 text-slate-700 text-xs leading-relaxed">
+                            <li><strong>Bước 1:</strong> Chọn một bài học có sẵn từ menu xổ xuống (Ví dụ: <em>Bài 4, Bài 5, Bài 6 Hóa 10, Cân bằng Hóa 11, Ester Hóa 12</em>) hoặc gõ tên bài mới và bấm <strong>"Tạo Khung"</strong>.</li>
+                            <li><strong>Bước 2:</strong> Toàn bộ Mục tiêu (Kiến thức, Năng lực, Phẩm chất), Thiết bị và 4 Hoạt động được tự động điền. Bạn có thể sửa trực tiếp trên giao diện.</li>
+                            <li><strong>Bước 3:</strong> Bấm <strong>"XUẤT KẾ HOẠCH BÀI DẠY RA FILE WORD (.DOCX)"</strong>. Hệ thống sẽ tải về ngay file Word định dạng chuẩn font Times New Roman, căn lề 3cm-2cm-2cm-2cm, bảng biểu đẹp mắt để in hoặc nộp duyệt.</li>
+                        </ul>
+                    </div>
+
+                    <div class="p-5 bg-blue-50/50 rounded-2xl border border-blue-100 space-y-3">
+                        <div class="flex items-center gap-2 font-bold text-blue-900 text-base">
+                            <i data-lucide="shuffle" class="w-5 h-5 text-blue-600"></i>
+                            Quy trình trộn đề thi 2025
+                        </div>
+                        <ul class="list-disc list-inside space-y-2 text-slate-700 text-xs leading-relaxed">
+                            <li>Chọn file đề Word (`.docx`) hoặc TeX (`.tex`) có sẵn trong máy.</li>
+                            <li>Nhập các mã đề cần tạo (ví dụ: <code class="bg-white px-1 py-0.5 rounded border">101, 102, 103, 104</code>).</li>
+                            <li>Bấm <strong>"Tiến hành trộn đề"</strong> để nhận ngay các file Word từng mã đề và file Word Ma trận đáp án tổng hợp.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-500 flex items-center justify-between">
+                    <span>Phiên bản: <strong>EduKit v1.0.0 Local</strong> | Bản quyền thiết kế riêng cho thầy Bảo</span>
+                    <span>Thư mục làm việc: <code>e:\lam de</code></span>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto py-4 text-center text-xs text-slate-400 border-t border-slate-200 bg-white">
+        Trợ Lý Giáo Viên THPT © 2026. Chạy cục bộ trực tiếp trên máy tính của bạn.
+    </footer>
+
+    <!-- App Logic JS -->
+    <script>
+        let currentParsedExam = null;
+        let currentShuffledExams = null;
+        let khbdActivitiesData = [];
+
+        function switchTab(tabId) {
+            document.getElementById('shuffle-tab').classList.add('hidden');
+            document.getElementById('khbd-tab').classList.add('hidden');
+            document.getElementById('guide-tab').classList.add('hidden');
+
+            document.getElementById('nav-shuffle').classList.remove('active-tab');
+            document.getElementById('nav-khbd').classList.remove('active-tab');
+            document.getElementById('nav-guide').classList.remove('active-tab');
+
+            document.getElementById(tabId).classList.remove('hidden');
+            
+            if (tabId === 'shuffle-tab') {
+                document.getElementById('nav-shuffle').classList.add('active-tab');
+                loadLocalFilesList();
+            }
+            if (tabId === 'khbd-tab') document.getElementById('nav-khbd').classList.add('active-tab');
+            if (tabId === 'guide-tab') document.getElementById('nav-guide').classList.add('active-tab');
+
+            lucide.createIcons();
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        // ================= KẾ HOẠCH BÀI DẠY (KHBD) =================
+
+        async function loadKHBDLessonLibrary() {
+            try {
+                const res = await fetch('/api/khbd/list_lessons');
+                const data = await res.json();
+                const sel = document.getElementById('select-lesson-library');
+                sel.innerHTML = '<option value="">-- Chọn bài học mẫu có sẵn --</option>';
+
+                if (data.status === 'success') {
+                    data.lessons.forEach(item => {
+                        const opt = document.createElement('option');
+                        opt.value = item.id;
+                        opt.innerText = `[Lớp ${item.grade}] ${item.title}`;
+                        sel.appendChild(opt);
+                    });
+                }
+
+                // Tải mặc định bài đầu tiên
+                onSelectLibraryLesson('hoa10_bai4');
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function onSelectLibraryLesson(lessonId) {
+            if (!lessonId) return;
+            try {
+                const res = await fetch(`/api/khbd/get_lesson/${lessonId}`);
+                const data = await res.json();
+                if (data.status === 'success') {
+                    fillKHBDForm(data.data);
+                }
+            } catch (err) {
+                alert('Lỗi nạp bài học');
+            }
+        }
+
+        async function generateCustomKHBD() {
+            const title = document.getElementById('input-custom-lesson').value.trim();
+            if (!title) {
+                alert('Vui lòng nhập tên bài học cần tạo khung!');
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/khbd/generate_smart', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        lesson_title: title,
+                        grade: document.getElementById('khbd-grade').value || '10',
+                        subject: document.getElementById('khbd-subject').value || 'HÓA HỌC'
+                    })
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    fillKHBDForm(data.data);
+                }
+            } catch (err) {
+                alert('Có lỗi khi tạo khung bài dạy');
+            }
+        }
+
+        function fillKHBDForm(d) {
+            document.getElementById('khbd-school').value = d.school_name || 'TRƯỜNG THPT NGUYỄN HUỆ';
+            document.getElementById('khbd-dept').value = d.department || 'TỔ HÓA HỌC';
+            document.getElementById('khbd-teacher').value = d.teacher_name || 'NGUYỄN VĂN BẢO';
+            document.getElementById('khbd-lesson').value = d.lesson_title || '';
+            document.getElementById('khbd-subject').value = d.subject || 'HÓA HỌC';
+            document.getElementById('khbd-grade').value = d.grade || '10';
+
+            document.getElementById('khbd-knowledge').value = d.objective_knowledge || '';
+            document.getElementById('khbd-comp-gen').value = d.objective_competence_general || '';
+            document.getElementById('khbd-comp-sub').value = d.objective_competence_subject || '';
+            document.getElementById('khbd-qualities').value = d.objective_qualities || '';
+
+            document.getElementById('khbd-eq-teacher').value = d.equipment_teacher || '';
+            document.getElementById('khbd-eq-student').value = d.equipment_student || '';
+
+            document.getElementById('khbd-appendix').value = d.appendix || '';
+
+            khbdActivitiesData = d.activities || [];
+            renderKHBDActivities();
+        }
+
+        function renderKHBDActivities() {
+            const container = document.getElementById('khbd-activities-container');
+            container.innerHTML = '';
+
+            khbdActivitiesData.forEach((act, idx) => {
+                const card = document.createElement('div');
+                card.className = "p-4 bg-slate-50 border border-slate-200 rounded-xl space-y-3";
+                card.innerHTML = `
+                    <div class="flex items-center justify-between">
+                        <span class="font-bold text-emerald-900 text-sm">${act.title}</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-2 text-xs">
+                        <div>
+                            <label class="block font-semibold text-slate-600 mb-1">Mục tiêu:</label>
+                            <textarea rows="2" class="w-full p-2 border rounded" onchange="khbdActivitiesData[${idx}].goal = this.value">${act.goal || ''}</textarea>
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-600 mb-1">Nội dung:</label>
+                            <textarea rows="2" class="w-full p-2 border rounded" onchange="khbdActivitiesData[${idx}].content = this.value">${act.content || ''}</textarea>
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-slate-600 mb-1">Sản phẩm:</label>
+                            <textarea rows="2" class="w-full p-2 border rounded" onchange="khbdActivitiesData[${idx}].product = this.value">${act.product || ''}</textarea>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-xs pt-1 border-t border-slate-200">
+                        <div>
+                            <label class="block font-semibold text-blue-700 mb-1">Hoạt động của GV (4 bước Chuyển giao - Thực hiện - Báo cáo - Kết luận):</label>
+                            <textarea rows="4" class="w-full p-2 border rounded leading-relaxed" onchange="khbdActivitiesData[${idx}].implementation_gv = this.value">${act.implementation_gv || ''}</textarea>
+                        </div>
+                        <div>
+                            <label class="block font-semibold text-emerald-700 mb-1">Hoạt động của HS (Thực hiện, Báo cáo & Dự kiến sản phẩm):</label>
+                            <textarea rows="4" class="w-full p-2 border rounded leading-relaxed" onchange="khbdActivitiesData[${idx}].implementation_hs = this.value">${act.implementation_hs || ''}</textarea>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        async function exportKHBDWord() {
+            const lesson = document.getElementById('khbd-lesson').value;
+            if (!lesson) {
+                alert('Vui lòng nhập tên bài học!');
+                return;
+            }
+
+            const payload = {
+                school_name: document.getElementById('khbd-school').value,
+                department: document.getElementById('khbd-dept').value,
+                teacher_name: document.getElementById('khbd-teacher').value,
+                lesson_title: lesson,
+                subject: document.getElementById('khbd-subject').value,
+                grade: document.getElementById('khbd-grade').value,
+                duration: "2 tiết",
+
+                objective_knowledge: document.getElementById('khbd-knowledge').value,
+                objective_competence_general: document.getElementById('khbd-comp-gen').value,
+                objective_competence_subject: document.getElementById('khbd-comp-sub').value,
+                objective_qualities: document.getElementById('khbd-qualities').value,
+
+                equipment_teacher: document.getElementById('khbd-eq-teacher').value,
+                equipment_student: document.getElementById('khbd-eq-student').value,
+
+                activities: khbdActivitiesData,
+                appendix: document.getElementById('khbd-appendix').value
+            };
+
+            try {
+                const res = await fetch('/api/khbd/export', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    window.location.href = data.url;
+                } else {
+                    alert('Lỗi xuất Word: ' + data.message);
+                }
+            } catch (err) {
+                alert('Có lỗi xảy ra khi xuất file Word');
+            }
+        }
+
+        // ================= TRỘN ĐỀ THI =================
+
+        async function loadLocalFilesList() {
+            try {
+                const res = await fetch('/api/list_local_files');
+                const data = await res.json();
+                const container = document.getElementById('local-files-list');
+                container.innerHTML = '';
+
+                if (data.status === 'success' && data.files.length > 0) {
+                    data.files.forEach(file => {
+                        const div = document.createElement('div');
+                        div.className = "flex items-center justify-between p-2 rounded-lg hover:bg-blue-50 border border-slate-100 cursor-pointer transition text-xs";
+                        div.onclick = () => loadExistingFile(file.name);
+                        
+                        let iconName = file.ext === '.docx' ? 'file-text' : (file.ext === '.tex' ? 'code-2' : 'file');
+                        div.innerHTML = `
+                            <div class="flex items-center gap-2 truncate">
+                                <i data-lucide="${iconName}" class="w-4 h-4 text-blue-600 shrink-0"></i>
+                                <span class="font-medium text-slate-700 truncate" title="${file.name}">${file.name}</span>
+                            </div>
+                            <span class="text-[10px] text-slate-400 shrink-0 ml-1">${file.size}</span>
+                        `;
+                        container.appendChild(div);
+                    });
+                    lucide.createIcons();
+                } else {
+                    container.innerHTML = '<div class="text-xs text-slate-400 py-3 text-center">Không tìm thấy file nào</div>';
+                }
+            } catch (err) {
+                console.error(err);
+            }
+        }
+
+        async function loadExistingFile(filename) {
+            try {
+                document.getElementById('current-file-name').innerText = `Đang nạp: ${filename}...`;
+                const res = await fetch('/api/load_file', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ filename: filename })
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    handleExamLoaded(data.filename, data.parsed, data.counts);
+                } else {
+                    alert('Lỗi nạp file: ' + data.message);
+                }
+            } catch (err) {
+                alert('Có lỗi xảy ra khi nạp file');
+            }
+        }
+
+        async function handleFileUpload(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            document.getElementById('current-file-name').innerText = `Đang tải lên: ${file.name}...`;
+            try {
+                const res = await fetch('/api/upload_file', {
+                    method: 'POST',
+                    body: formData
+                });
+                const data = await res.json();
+                if (data.status === 'success') {
+                    handleExamLoaded(data.filename, data.parsed, data.counts);
+                    loadLocalFilesList();
+                } else {
+                    alert('Lỗi: ' + data.message);
+                }
+            } catch (err) {
+                alert('Lỗi khi tải file lên');
+            }
+        }
+
+        function handleExamLoaded(filename, parsed, counts) {
+            currentParsedExam = parsed;
+            document.getElementById('current-file-name').innerText = filename;
+            
+            document.getElementById('stat-badges').innerHTML = `
+                <span class="px-2.5 py-1 bg-blue-100 text-blue-700 text-xs rounded-lg font-bold">Phần I: ${counts.part1} câu</span>
+                <span class="px-2.5 py-1 bg-amber-100 text-amber-700 text-xs rounded-lg font-bold">Phần II: ${counts.part2} câu</span>
+                <span class="px-2.5 py-1 bg-emerald-100 text-emerald-700 text-xs rounded-lg font-bold">Phần III: ${counts.part3} câu</span>
+            `;
+
+            const container = document.getElementById('exam-preview-container');
+            container.innerHTML = '';
+
+            if (parsed.part1 && parsed.part1.length > 0) {
+                const h = document.createElement('div');
+                h.className = "font-bold text-blue-800 text-sm border-b border-blue-100 pb-1";
+                h.innerText = `PHẦN I. Câu trắc nghiệm nhiều phương án lựa chọn (${parsed.part1.length} câu)`;
+                container.appendChild(h);
+
+                parsed.part1.forEach((q, idx) => {
+                    const qDiv = document.createElement('div');
+                    qDiv.className = "p-3 bg-slate-50 rounded-xl space-y-1.5 border border-slate-100";
+                    qDiv.innerHTML = `
+                        <p class="font-semibold text-slate-800"><span class="text-blue-600 font-bold">Câu ${idx + 1}:</span> ${q.question}</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1 text-xs text-slate-600 pl-2">
+                            ${q.options.map((opt, i) => `
+                                <div class="${i === q.correct_idx ? 'font-bold text-emerald-700' : ''}">
+                                    ${['A', 'B', 'C', 'D'][i]}. ${opt} ${i === q.correct_idx ? '✓' : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    container.appendChild(qDiv);
+                });
+            }
+
+            if (parsed.part2 && parsed.part2.length > 0) {
+                const h = document.createElement('div');
+                h.className = "font-bold text-amber-800 text-sm border-b border-amber-100 pb-1 mt-4";
+                h.innerText = `PHẦN II. Câu trắc nghiệm đúng sai (${parsed.part2.length} câu)`;
+                container.appendChild(h);
+
+                parsed.part2.forEach((q, idx) => {
+                    const qDiv = document.createElement('div');
+                    qDiv.className = "p-3 bg-slate-50 rounded-xl space-y-1.5 border border-slate-100";
+                    qDiv.innerHTML = `
+                        <p class="font-semibold text-slate-800"><span class="text-amber-600 font-bold">Câu ${idx + 1}:</span> ${q.question}</p>
+                        <div class="space-y-1 text-xs text-slate-600 pl-2">
+                            ${q.items.map(it => `
+                                <div>${it.id}) ${it.text} <span class="font-bold text-xs ${it.is_true ? 'text-blue-600' : 'text-red-500'}">[${it.is_true ? 'Đúng' : 'Sai'}]</span></div>
+                            `).join('')}
+                        </div>
+                    `;
+                    container.appendChild(qDiv);
+                });
+            }
+
+            if (parsed.part3 && parsed.part3.length > 0) {
+                const h = document.createElement('div');
+                h.className = "font-bold text-emerald-800 text-sm border-b border-emerald-100 pb-1 mt-4";
+                h.innerText = `PHẦN III. Câu trắc nghiệm trả lời ngắn (${parsed.part3.length} câu)`;
+                container.appendChild(h);
+
+                parsed.part3.forEach((q, idx) => {
+                    const qDiv = document.createElement('div');
+                    qDiv.className = "p-3 bg-slate-50 rounded-xl space-y-1.5 border border-slate-100";
+                    qDiv.innerHTML = `
+                        <p class="font-semibold text-slate-800"><span class="text-emerald-600 font-bold">Câu ${idx + 1}:</span> ${q.question}</p>
+                        ${q.answer ? `<p class="text-xs font-bold text-emerald-700 pl-2">Đáp án: ${q.answer}</p>` : ''}
+                    `;
+                    container.appendChild(qDiv);
+                });
+            }
+
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        async function startShuffle() {
+            if (!currentParsedExam) {
+                alert('Vui lòng chọn hoặc nạp một file đề thi trước khi trộn!');
+                return;
+            }
+
+            const rawCodes = document.getElementById('cfg-codes').value;
+            const codes = rawCodes.split(',').map(s => s.trim()).filter(Boolean);
+            if (codes.length === 0) {
+                alert('Vui lòng nhập ít nhất một mã đề!');
+                return;
+            }
+
+            const schoolName = document.getElementById('cfg-school').value;
+            const shuffleOpts = document.getElementById('cfg-shuffle-opts').checked;
+            const shuffleTf = document.getElementById('cfg-shuffle-tf').checked;
+
+            const btn = document.getElementById('btn-shuffle');
+            btn.disabled = true;
+            btn.innerHTML = `<i data-lucide="loader-2" class="w-5 h-5 animate-spin"></i><span>Đang trộn đề & tạo file Word...</span>`;
+            lucide.createIcons();
+
+            try {
+                const res = await fetch('/api/shuffle_exam', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        exam_data: currentParsedExam,
+                        codes: codes,
+                        school_name: schoolName,
+                        shuffle_opts: shuffleOpts,
+                        shuffle_tf: shuffleTf
+                    })
+                });
+
+                const data = await res.json();
+                if (data.status === 'success') {
+                    currentShuffledExams = data.shuffled;
+                    renderShuffleResults(data);
+                } else {
+                    alert('Lỗi khi trộn đề: ' + data.message);
+                }
+            } catch (err) {
+                alert('Có lỗi xảy ra khi trộn đề');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<i data-lucide="zap" class="w-5 h-5"></i><span>TIẾN HÀNH TRỘN ĐỀ</span>`;
+                lucide.createIcons();
+            }
+        }
+
+        function renderShuffleResults(data) {
+            const box = document.getElementById('shuffle-result-box');
+            box.classList.remove('hidden');
+
+            document.getElementById('btn-download-zip').href = data.zip_url;
+
+            const grid = document.getElementById('download-buttons-grid');
+            grid.innerHTML = '';
+
+            data.files.forEach(f => {
+                const a = document.createElement('a');
+                a.href = f.url;
+                a.download = f.filename;
+                a.className = f.code === 'DAP_AN' 
+                    ? "p-3 bg-rose-50 hover:bg-rose-100 border border-rose-200 rounded-xl text-center text-xs font-bold text-rose-700 transition flex items-center justify-center gap-1.5 shadow-sm"
+                    : "p-3 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-xl text-center text-xs font-bold text-blue-700 transition flex items-center justify-center gap-1.5 shadow-sm";
+                
+                a.innerHTML = `
+                    <i data-lucide="file-down" class="w-4 h-4"></i>
+                    <span>${f.code === 'DAP_AN' ? 'Bảng Đáp Án (.docx)' : `Mã đề ${f.code} (.docx)`}</span>
+                `;
+                grid.appendChild(a);
+            });
+
+            const tabsContainer = document.getElementById('preview-code-tabs');
+            tabsContainer.innerHTML = '';
+            const codes = Object.keys(data.shuffled);
+
+            codes.forEach((code, idx) => {
+                const b = document.createElement('button');
+                b.className = idx === 0 
+                    ? "px-3 py-1 bg-blue-600 text-white rounded-lg text-xs font-bold"
+                    : "px-3 py-1 bg-slate-200 text-slate-700 hover:bg-slate-300 rounded-lg text-xs font-semibold";
+                b.innerText = `Đề ${code}`;
+                b.onclick = () => {
+                    Array.from(tabsContainer.children).forEach(btn => {
+                        btn.className = "px-3 py-1 bg-slate-200 text-slate-700 hover:bg-slate-300 rounded-lg text-xs font-semibold";
+                    });
+                    b.className = "px-3 py-1 bg-blue-600 text-white rounded-lg text-xs font-bold";
+                    previewSpecificShuffledCode(code);
+                };
+                tabsContainer.appendChild(b);
+            });
+
+            previewSpecificShuffledCode(codes[0]);
+            lucide.createIcons();
+            box.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function previewSpecificShuffledCode(code) {
+            const ex = currentShuffledExams[code];
+            if (!ex) return;
+
+            const preview = document.getElementById('shuffled-code-preview');
+            let html = `<div class="font-bold text-blue-900 mb-2">ĐỀ THI MÃ ${code} - Xem trước 5 câu đầu:</div>`;
+            
+            const firstFew = ex.part1.slice(0, 5);
+            firstFew.forEach(q => {
+                html += `
+                    <div class="mb-2 p-2 bg-white rounded border border-slate-100">
+                        <p class="font-semibold text-slate-800">Câu ${q.number}: ${q.question}</p>
+                        <div class="grid grid-cols-2 gap-1 mt-1 text-[11px]">
+                            ${q.options.map((opt, i) => `
+                                <div class="${i === q.correct_idx ? 'font-bold text-emerald-700' : 'text-slate-600'}">
+                                    ${['A', 'B', 'C', 'D'][i]}. ${opt} ${i === q.correct_idx ? '✓' : ''}
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+            preview.innerHTML = html;
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadKHBDLessonLibrary();
+            lucide.createIcons();
+        });
+    </script>
+</body>
+</html>
