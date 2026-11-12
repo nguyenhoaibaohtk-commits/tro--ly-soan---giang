@@ -290,7 +290,7 @@ class KHBDProcessor:
         """Tự động sinh bộ khung giáo án chuẩn 5512 cho bài học mới bất kì"""
         clean_name = lesson_title.upper().strip()
         return {
-            "school_name": "TRƯỜNG THPT NGUYỄN HUỆ",
+            "school_name": "TRƯỜNG THPT HUỲNH THÚC KHÁNG",
             "department": "TỔ HÓA HỌC",
             "teacher_name": "NGUYỄN VĂN BẢO",
             "lesson_title": clean_name,
