@@ -292,7 +292,7 @@ class KHBDProcessor:
         return {
             "school_name": "TRƯỜNG THPT HUỲNH THÚC KHÁNG",
             "department": "TỔ HÓA HỌC",
-            "teacher_name": "NGUYỄN VĂN BẢO",
+            "teacher_name": "NGUYỄN HOÀI BẢO",
             "lesson_title": clean_name,
             "subject": subject,
             "grade": str(grade),
