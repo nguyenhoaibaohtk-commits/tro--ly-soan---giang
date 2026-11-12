@@ -439,7 +439,7 @@ class ExamWordExporter:
     """Xuất đề thi ra file Word (.docx) chuẩn mẫu in ấn của Bộ GD&ĐT"""
 
     @staticmethod
-    def export_single_exam(exam_data, output_path, school_name="TRƯỜNG THPT CHUYÊN ...", exam_name=None):
+    def export_single_exam(exam_data, output_path, school_name="TRƯỜNG THPT HUỲNH THÚC KHÁNG", exam_name=None):
         doc = Document()
 
         # Thiết lập lề trang A4 chuẩn (Top: 2cm, Bottom: 2cm, Left: 2.5cm, Right: 2cm)

@@ -171,13 +171,24 @@
                         </div>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">2a. Năng lực chung (Tự chủ, giao tiếp - hợp tác, giải quyết vấn đề):</label>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">2.1. Năng lực chung (Tự chủ, giao tiếp - hợp tác, giải quyết vấn đề):</label>
                                 <textarea id="khbd-comp-gen" rows="3" class="w-full p-3 border border-slate-300 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-emerald-500"></textarea>
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">2b. Năng lực đặc thù Hóa học (Nhận thức hóa học, tìm hiểu tự nhiên, vận dụng):</label>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">2.2. Năng lực đặc thù Hóa học (Nhận thức hóa học, tìm hiểu tự nhiên, vận dụng):</label>
                                 <textarea id="khbd-comp-sub" rows="3" class="w-full p-3 border border-slate-300 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-emerald-500"></textarea>
                             </div>
+                        </div>
+                        <div>
+                            <div class="flex items-center justify-between mb-1">
+                                <label class="block text-xs font-bold text-emerald-800 flex items-center gap-1.5">
+                                    <i data-lucide="shield-check" class="w-4 h-4 text-emerald-600"></i>
+                                    2.3. Năng lực số & An toàn mạng (Tích hợp theo CV 3456/BGDĐT-GDPT & QĐ 6206/BGDĐT-GDPT):
+                                </label>
+                                <span class="text-[11px] bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded-full font-bold">Khung Bậc 5 THPT (NC1) & 8 Nhóm ATM</span>
+                            </div>
+                            <textarea id="khbd-comp-digital" rows="3" class="w-full p-3 border border-emerald-300 bg-emerald-50/20 rounded-xl text-xs leading-relaxed focus:ring-2 focus:ring-emerald-500 font-mono text-slate-800" placeholder="- Năng lực số: [Mã chỉ báo NC1] - Yêu cầu cần đạt...
+- An toàn mạng: [ATM1 - ATM8] - Yêu cầu bảo mật, đạo đức số, bản quyền..."></textarea>
                         </div>
                         <div>
                             <label class="block text-xs font-semibold text-slate-700 mb-1">3. Về phẩm chất (Yêu nước, nhân ái, chăm chỉ, trung thực, trách nhiệm):</label>
@@ -463,17 +474,18 @@
                 const sel = document.getElementById('select-lesson-library');
                 sel.innerHTML = '<option value="">-- Chọn bài học mẫu có sẵn --</option>';
 
-                if (data.status === 'success') {
+                if (data.status === 'success' && data.lessons.length > 0) {
                     data.lessons.forEach(item => {
                         const opt = document.createElement('option');
                         opt.value = item.id;
                         opt.innerText = `[Lớp ${item.grade}] ${item.title}`;
                         sel.appendChild(opt);
                     });
-                }
 
-                // Tải mặc định bài đầu tiên
-                onSelectLibraryLesson('hoa10_bai4');
+                    // Tải mặc định bài đầu tiên
+                    sel.value = data.lessons[0].id;
+                    onSelectLibraryLesson(data.lessons[0].id);
+                }
             } catch (err) {
                 console.error(err);
             }
@@ -529,6 +541,7 @@
             document.getElementById('khbd-knowledge').value = d.objective_knowledge || '';
             document.getElementById('khbd-comp-gen').value = d.objective_competence_general || '';
             document.getElementById('khbd-comp-sub').value = d.objective_competence_subject || '';
+            document.getElementById('khbd-comp-digital').value = d.objective_competence_digital_safety || '';
             document.getElementById('khbd-qualities').value = d.objective_qualities || '';
 
             document.getElementById('khbd-eq-teacher').value = d.equipment_teacher || '';
@@ -599,6 +612,7 @@
                 objective_knowledge: document.getElementById('khbd-knowledge').value,
                 objective_competence_general: document.getElementById('khbd-comp-gen').value,
                 objective_competence_subject: document.getElementById('khbd-comp-sub').value,
+                objective_competence_digital_safety: document.getElementById('khbd-comp-digital').value,
                 objective_qualities: document.getElementById('khbd-qualities').value,
 
                 equipment_teacher: document.getElementById('khbd-eq-teacher').value,
